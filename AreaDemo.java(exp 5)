@@ -1,0 +1,51 @@
+import java.util.*;
+class AreaCalculator
+{
+    double area;
+    void area(double r)
+    {
+       area=3.14*r*r;
+       System.out.println("Area of the cicle:"+area);
+    }
+    void area(double l,double b)
+    {
+        area=l*b;
+        System.out.println("Area of the rectangle:"+area);
+    }
+    void area(double s1,double s2,double s3)
+    {
+       double s=(s1+s2+s3)/2;
+       area=Math.sqrt(s*(s-s1)*(s-s2)*(s-s3));
+       System.out.println("Area of the triangle:"+area);
+    }
+}
+class AreaDemo
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the radius of the circle:");
+        double radius=sc.nextDouble();
+        AreaCalculator a1=new AreaCalculator();
+        a1.area(radius);
+
+        System.out.println("Enter the length of the rectangle:");
+        double length=sc.nextDouble();
+        System.out.println("Enter the breadth of the rectangle:");
+        double breadth=sc.nextDouble();
+        AreaCalculator a2=new AreaCalculator();
+        a2.area(length,breadth);
+
+        System.out.println("Enter the three sides of the triangle:");
+        double side1=sc.nextDouble();
+        double side2=sc.nextDouble();
+        double side3=sc.nextDouble();
+        AreaCalculator a3=new AreaCalculator();
+        a2.area(side1,side2,side3);
+    }
+}
+
+
+
+
+
