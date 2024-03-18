@@ -1,0 +1,96 @@
+                                                                                                                                                                                                    Bank.java                                                                                                                                                                                                              
+import java.util.Scanner;
+class Bank {
+    String accountHolderName;
+    float accountBalance;
+    String accountNumber;
+    String accountType;
+
+    Bank(String accountHolderName, float initialBalance, String accountNumber, String accountType) {
+        this.accountHolderName = accountHolderName;
+        this.accountBalance = initialBalance;
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
+    }
+
+    void deposit(float amount) {
+        if (amount > 0) {
+            accountBalance += amount;
+            System.out.println("Deposit successful. New balance: " + accountBalance);
+        } else {
+            System.out.println("Invalid deposit amount. Please enter a positive value.");
+        }
+    }
+
+    void withdraw(float amount) {
+        if (amount > 0 && amount <= accountBalance) {
+            accountBalance -= amount;
+            System.out.println("Withdrawal successful. New balance: " + accountBalance);
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient funds.");
+        }
+    }
+
+    float getAccountBalance() {
+        return accountBalance;
+    }
+
+    void displayAccountDetails() {
+        System.out.println("Account Holder: " + accountHolderName);
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Type: " + accountType);
+        System.out.println("Account Balance: " + accountBalance);
+    }
+
+    public static void main(String args[]) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter account holder name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter initial balance: ");
+        float balance = scanner.nextFloat();
+
+        System.out.print("Enter account number: ");
+        String number = scanner.next();
+
+        System.out.print("Enter account type: ");
+        String type = scanner.next();
+
+        Bank bankAccount = new Bank(name, balance, number, type);
+
+        int choice;
+        do {
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Display Account Details");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter deposit amount: ");
+                    float depositAmount = scanner.nextFloat();
+                    bankAccount.deposit(depositAmount);
+                    break;
+                case 2:
+                    System.out.print("Enter withdrawal amount: ");
+                    float withdrawAmount = scanner.nextFloat();
+                    bankAccount.withdraw(withdrawAmount);
+                    break;
+                case 3:
+                    bankAccount.displayAccountDetails();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose again.");
+            }
+        } while (choice != 4);
+
+        scanner.close();
+    }
+}
