@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+class StringArray {
+    String[] strings;
+    int numberOfStrings;
+
+    public StringArray() {
+        strings = null;
+        numberOfStrings = 0;
+    }
+
+    public void readStrings() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of strings: ");
+        numberOfStrings = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        strings = new String[numberOfStrings];
+
+        System.out.println("Enter " + numberOfStrings + " strings:");
+        for (int i = 0; i < numberOfStrings; i++) {
+            strings[i] = scanner.nextLine();
+        }
+    }
+
+    public void search(String searchString) {
+        if (strings == null || numberOfStrings == 0) {
+            System.out.println("Array is empty. No strings to search.");
+            return;
+        }
+
+        boolean found = false;
+        for (int i = 0; i < numberOfStrings; i++) {
+            if (strings[i].equals(searchString)) {
+                System.out.println(searchString + " found at index " + i);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println(searchString + " not found in the array.");
+        }
+    }
+
+    public void sort() {
+        if (strings == null || numberOfStrings == 0) {
+            System.out.println("Array is empty. No strings to sort.");
+            return;
+        }
+
+        for (int i = 0; i < numberOfStrings - 1; i++) {
+            for (int j = 0; j < numberOfStrings - i - 1; j++) {
+                if (strings[j].compareTo(strings[j + 1]) > 0) {
+                    // Swap strings[j] and strings[j + 1]
+                    String temp = strings[j];
+                    strings[j] = strings[j + 1];
+                    strings[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        StringArray stringArray = new StringArray();
+        stringArray.readStrings();
+
+        System.out.print("Enter the string to search: ");
+        String searchString = scanner.nextLine();
+        stringArray.search(searchString);
+
+        System.out.println("Sorted array:");
+        stringArray.sort();
+        for (int i = 0; i < stringArray.numberOfStrings; i++) {
+            System.out.println(stringArray.strings[i]);
+        }
+    }
+}
